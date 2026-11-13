@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* Тёмная тема через класс .dark на <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f5f3ed;
+  --surface: #ffffff;
+  --foreground: #242620;
+  --brand-accent: #285c49;
+  --brand-line: #d4d7cb;
+}
+
+.dark {
+  --background: #191f1a;
+  --surface: #252d26;
+  --foreground: #f0f0e6;
+  --brand-accent: #9cbca4;
+  --brand-line: #414a3d;
+}
+
+@theme inline {
+  --color-sky-50: #f0f4ed;
+  --color-sky-100: #e3ecdf;
+  --color-sky-200: #cedec9;
+  --color-sky-300: #a9c3a5;
+  --color-sky-400: #6d987b;
+  --color-sky-500: #376d53;
+  --color-sky-600: #285c49;
+  --color-sky-700: #224b3d;
+  --color-sky-800: #1b3b30;
+  --color-sky-900: #183228;
+  --color-sky-950: #12251e;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+:focus-visible { outline: 3px solid var(--brand-accent); outline-offset: 4px; }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 200; transform: translateY(-150%); background: var(--surface); padding: 12px 20px; border-radius: 12px; }
+.skip-link:focus { transform: none; }
+
+/* ── Плавающие блобы на герое ── */
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+  66% {
+    transform: translate(-25px, 25px) scale(0.95);
+  }
+}
+
+.blob {
+  animation: blob 18s ease-in-out infinite;
+}
+.blob-slow {
+  animation: blob 26s ease-in-out infinite reverse;
+}
+
+/* ── Скрыть скроллбар у каруселей ── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .blob-slow {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
