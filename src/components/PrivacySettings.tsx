@@ -33,7 +33,7 @@ export function PrivacySettings() {
     <button onClick={() => setSettings(true)} className="block mx-auto my-4 underline text-sm">
       Настройки хранения данных
     </button>
-    {banner && <section aria-label="Настройки Cookie и локального хранилища" className="fixed bottom-24 sm:bottom-4 left-4 right-4 z-[85] mx-auto max-w-2xl rounded-md bg-surface p-5 shadow-xl ring-1 ring-slate-300 dark:ring-slate-700">
+    {banner && <section aria-label="Настройки Cookie и локального хранилища" className="privacy-banner">
       <p className="text-sm">Сохраняем тему, избранное, сравнение и ваш выбор в браузере. Аналитика и рекламные Cookie не подключены. Внешние фото загружаются с других сайтов.</p>
       <Link href="/legal/cookies" className="text-sm underline">Подробнее</Link>
       <div className="mt-3 flex flex-wrap gap-3">

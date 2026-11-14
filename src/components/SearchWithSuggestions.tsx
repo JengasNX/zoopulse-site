@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { animals, orgTypeLabels, orgs, speciesEmoji } from "@/data";
 import { SafeImg } from "./ui";
+import { Icon } from "./Icon";
 
 export function SearchWithSuggestions() {
   const [query, setQuery] = useState("");
@@ -54,13 +55,13 @@ export function SearchWithSuggestions() {
   const resultUrl = `/search?q=${encodeURIComponent(query.trim())}`;
 
   return (
-    <div ref={boxRef} className="relative mx-auto w-full max-w-xl">
+    <div ref={boxRef} className="site-search relative mx-auto w-full max-w-xl">
       <form onSubmit={e => {
         e.preventDefault();
         setOpen(false);
         router.push(open && active >= 0 && destinations[active] ? destinations[active] : resultUrl);
       }} className="flex items-center gap-2 rounded-full bg-white p-2 pl-5 shadow-lg ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700">
-        <span className="text-slate-400">🔍</span>
+        <Icon name="search" className="search-icon" />
         <input
           aria-label="Поиск животных и организаций"
           role="combobox"
@@ -107,7 +108,7 @@ export function SearchWithSuggestions() {
           >
             {!hasResults && (
               <div className="p-4 text-sm text-slate-500 dark:text-slate-400">
-                Ничего не нашлось по «{query}» 🤔
+                Ничего не нашлось по «{query}». Попробуйте другое имя или город.
               </div>
             )}
 
@@ -122,7 +123,7 @@ export function SearchWithSuggestions() {
                     role="option"
                     id={`${listId}-${i}`}
                     aria-selected={active === i}
-                    style={active === i ? { outline: "2px solid #0284c7", outlineOffset: "-2px" } : undefined}
+                    style={active === i ? { outline: "2px solid var(--brand-accent)", outlineOffset: "-2px" } : undefined}
                     href={`/animals/${a.id}`}
                     onClick={() => setOpen(false)}
                     className="flex items-center gap-3 rounded-xl px-3 py-2 transition hover:bg-slate-50 dark:hover:bg-slate-800"
@@ -155,13 +156,13 @@ export function SearchWithSuggestions() {
                     role="option"
                     id={`${listId}-${animalHits.length + i}`}
                     aria-selected={active === animalHits.length + i}
-                    style={active === animalHits.length + i ? { outline: "2px solid #0284c7", outlineOffset: "-2px" } : undefined}
+                    style={active === animalHits.length + i ? { outline: "2px solid var(--brand-accent)", outlineOffset: "-2px" } : undefined}
                     href={`/orgs/${o.id}`}
                     onClick={() => setOpen(false)}
                     className="flex items-center gap-3 rounded-xl px-3 py-2 transition hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-lg dark:bg-sky-950">
-                      {o.type === "shelter" ? "🏠" : o.type === "zoo" ? "🦁" : "🏥"}
+                      <Icon name={o.type === "clinic" ? "health" : "home"} />
                     </span>
                     <div className="min-w-0">
                       <div className="text-sm font-semibold">{o.name}</div>

@@ -8,6 +8,7 @@ import type { Animal, Species } from "@/data/types";
 import { PetCard } from "@/components/PetCard";
 import { Modal } from "@/components/ui";
 import { useComparison } from "@/components/comparison";
+import { Icon } from "@/components/Icon";
 
 export function AnimalsCatalog() {
   const params = useSearchParams();
@@ -67,7 +68,7 @@ export function AnimalsCatalog() {
     <div className="pet-catalog-layout">
       <aside className="pet-desktop-filters"><h2 className="pet-eyebrow">Уточнить поиск</h2>{controls}<p className="pet-filter-note">Не нашли свой город? Реальные организации подключим позже. Пока можно изучить устройство каталога.</p></aside>
       <section className="pet-results" aria-label="Результаты поиска питомцев">
-        <div className="pet-result-tools"><label className="pet-search-label"><span className="sr-only">Поиск по имени, породе или городу</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Имя, порода или город" type="search" maxLength={120} /><span aria-hidden="true">⌕</span></label><button className="pet-mobile-filter-button" onClick={() => setFiltersOpen(true)}>Фильтры{active.length > 0 ? ` / ${active.length}` : ""}</button><label className="pet-sort"><span className="sr-only">Сортировка</span><select value={sort} onChange={event => setSort(event.target.value)}><option value="name">По имени</option><option value="age-asc">Сначала младшие</option><option value="age-desc">Сначала старшие</option></select></label></div>
+        <div className="pet-result-tools"><label className="pet-search-label"><span className="sr-only">Поиск по имени, породе или городу</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Имя, порода или город" type="search" maxLength={120} /><span aria-hidden="true"><Icon name="search" /></span></label><button className="pet-mobile-filter-button" onClick={() => setFiltersOpen(true)}><Icon name="filter" />Фильтры{active.length > 0 ? ` / ${active.length}` : ""}</button><label className="pet-sort"><span className="sr-only">Сортировка</span><select value={sort} onChange={event => setSort(event.target.value)}><option value="name">По имени</option><option value="age-asc">Сначала младшие</option><option value="age-desc">Сначала старшие</option></select></label></div>
         <div className="pet-results-meta"><p role="status" aria-live="polite">Найдено: <strong>{filtered.length}</strong></p>{active.length > 0 && <button className="pet-text-button" onClick={reset}>Сбросить всё</button>}</div>
         {active.length > 0 && <div className="pet-active-filters">{active.map(filter => <button key={filter.label} onClick={filter.clear} aria-label={`Снять фильтр: ${filter.label}`}>{filter.label}<span aria-hidden="true">×</span></button>)}</div>}
         {filtered.length ? <div className="pet-results-grid">{filtered.map(animal => <PetCard key={animal.id} animal={animal} />)}</div> : <div className="pet-empty"><span className="pet-eyebrow">Поиск продолжается</span><h2>Пока не встретились.</h2><p>Попробуйте другой город или уберите часть фильтров.</p><button className="pet-primary-button" onClick={reset}>Показать все анкеты ↗</button></div>}

@@ -35,7 +35,7 @@ export function Navbar() {
         <nav className="desktop-navigation" aria-label="Основная навигация">
           {links.filter(link => !["/listings", "/events", "/clinics", "/compare"].includes(link.href)).map(link => <Link aria-current={pathname.startsWith(link.href) ? "page" : undefined} key={link.href} href={link.href}>{link.label}</Link>)}
         </nav>
-        <div className="header-actions"><Link href="/favorites" className="header-favorites" aria-label={`Избранное: ${count}`}><span aria-hidden="true">♡</span>{count > 0 && <span className="favorite-count">{count}</span>}</Link><button aria-expanded={open} aria-controls="site-menu" aria-label={open ? "Закрыть меню" : "Открыть меню"} onClick={() => setOpen(value => !value)} className="site-menu-button"><span>{open ? "Закрыть" : "Меню"}</span><span aria-hidden="true">{open ? "×" : "☰"}</span></button></div>
+        <div className="header-actions"><Link href="/favorites" className="header-favorites" aria-label={`Избранное: ${count}`}><Icon name="heart" />{count > 0 && <span className="favorite-count">{count}</span>}</Link><button aria-expanded={open} aria-controls="site-menu" aria-label={open ? "Закрыть меню" : "Открыть меню"} onClick={() => setOpen(value => !value)} className="site-menu-button"><span>{open ? "Закрыть" : "Меню"}</span><Icon name={open ? "close" : "menu"} /></button></div>
       </div>
       {open && <nav id="site-menu" className="expanded-navigation" aria-label="Все разделы">
         {links.map((link, i) => <Link key={link.href} href={link.href} aria-current={pathname.startsWith(link.href) ? "page" : undefined} onClick={() => setOpen(false)}><span>0{i + 1}</span>{link.label}<span aria-hidden="true">↗</span></Link>)}

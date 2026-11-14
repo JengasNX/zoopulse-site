@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { animals } from "@/data";
 import { COMPARISON_KEY, COMPARISON_LIMIT, sanitizeComparison, toggleComparison } from "@/lib/comparison";
+import { Icon } from "./Icon";
 
 const allowedIds = animals.map(animal => animal.id);
 const ComparisonContext = createContext<{
@@ -49,7 +50,7 @@ export function CompareButton({ id, name }: { id: string; name: string }) {
     aria-label={selected ? `Убрать из сравнения: ${name}` : `Добавить к сравнению: ${name}`}
     disabled={!ready || full} title={full ? "Можно сравнить до трёх питомцев. Уберите одного из выбранных." : undefined}
     onClick={() => toggle(id)}>
-    <span aria-hidden="true">{selected ? "✓" : "+"}</span> {selected ? "В сравнении" : full ? "Выбрано 3 из 3" : "К сравнению"}
+    <Icon name={selected ? "check" : "plus"} /> {selected ? "В сравнении" : full ? "Выбрано 3 из 3" : "К сравнению"}
   </button>;
 }
 

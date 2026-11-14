@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useId, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MeetingMark } from "./Brand";
+import { Icon } from "./Icon";
 
 /* ── Фото с fallback-заглушкой ── */
 export function SafeImg({
@@ -135,7 +136,7 @@ export function Modal({
                 aria-label="Закрыть"
                 className="flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800"
               >
-                ✕
+                <Icon name="close" />
               </button>
             </div>
             {children}
@@ -160,7 +161,7 @@ export function SuccessCheck({ message }: { message: string }) {
           cy="26"
           r="24"
           fill="none"
-          stroke="#38bdf8"
+           stroke="var(--brand-accent)"
           strokeWidth="3"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
@@ -168,7 +169,7 @@ export function SuccessCheck({ message }: { message: string }) {
         />
         <motion.path
           fill="none"
-          stroke="#38bdf8"
+           stroke="var(--brand-accent)"
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -280,10 +281,10 @@ export function SectionTitle({
 }
 
 /* ── Пустое состояние ── */
-export function EmptyState({ emoji = "🔍", title, hint }: { emoji?: string; title: string; hint?: string }) {
+export function EmptyState({ title, hint }: { emoji?: string; title: string; hint?: string }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-3xl bg-surface px-6 py-16 text-center dark:bg-slate-900">
-      <span className="text-5xl">{emoji}</span>
+    <div className="interface-empty">
+      <MeetingMark />
       <p className="text-lg font-semibold">{title}</p>
       {hint && <p className="max-w-sm text-sm text-slate-500 dark:text-slate-400">{hint}</p>}
     </div>
@@ -293,12 +294,12 @@ export function EmptyState({ emoji = "🔍", title, hint }: { emoji?: string; ti
 /* ── Скелетон-карточка ── */
 export function SkeletonCard() {
   return (
-    <div className="overflow-hidden rounded-2xl bg-surface dark:bg-slate-900">
-      <div className="aspect-[4/3] animate-pulse bg-slate-200 dark:bg-slate-800" />
-      <div className="space-y-2.5 p-4">
-        <div className="h-4 w-2/3 animate-pulse rounded bg-slate-200 dark:bg-slate-800" />
-        <div className="h-3 w-1/2 animate-pulse rounded bg-slate-200 dark:bg-slate-800" />
-        <div className="h-3 w-1/3 animate-pulse rounded bg-slate-200 dark:bg-slate-800" />
+    <div className="interface-skeleton" aria-hidden="true">
+      <div className="skeleton-photo" />
+      <div className="skeleton-copy">
+        <div />
+        <div />
+        <div />
       </div>
     </div>
   );
