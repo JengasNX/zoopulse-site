@@ -1,6 +1,6 @@
 /**
  * Pure policy predicates, NOT authentication or an HTTP security boundary.
- * The future server DAL must load actor/memberships/resource from its trusted
+ * The server DAL must load actor/memberships/resource from its trusted
  * session + database, never deserialize this context from a client request.
  */
 export type Actor = {

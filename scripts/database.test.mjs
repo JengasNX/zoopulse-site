@@ -7,7 +7,7 @@ test("PostgreSQL schema, history and tenant integrity", async t => {
   const db = new PGlite();
   try {
     const migrations = await loadMigrations();
-    await t.test("apply both migrations and keep an idempotent journal", async () => {
+    await t.test("apply all migrations and keep an idempotent journal", async () => {
       assert.deepEqual(await migrate(db, migrations), migrations.map(m => m.name));
       assert.deepEqual(await migrate(db, migrations), []);
     });
@@ -55,7 +55,7 @@ test("PostgreSQL schema, history and tenant integrity", async t => {
     });
     await t.test("failed migration rolls back DDL and journal together", async () => {
       await assert.rejects(migrate(db, [...migrations, {
-        name: "003_failure.sql", checksum: "test-only",
+        name: "004_failure.sql", checksum: "test-only",
         sql: "CREATE TABLE must_rollback(id integer); INSERT INTO table_does_not_exist VALUES (1);",
       }]));
       assert.equal((await db.query("SELECT to_regclass('must_rollback') AS name")).rows[0].name, null);
