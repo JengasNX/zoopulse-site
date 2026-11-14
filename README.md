@@ -23,13 +23,17 @@ npm run dev
 ## Проверки
 ```powershell
 npm run build
-node --test scripts/comparison.test.mjs
+npm test
 node scripts/audit-smoke.mjs
 npm audit --omit=dev
 ```
 
 Smoke-тесты требуют запущенный сервер. Они проверяют HTTP/H1/заголовки/404,
 а не все клики, доступность, юридическую готовность или Core Web Vitals.
+`npm test` проверяет сравнение, правила доступа и SQL-миграции в PGlite.
+Он не требует Docker, SMTP или сетевой БД. Инструкция локального PostgreSQL:
+`db/README.md`. Миграции настоящей БД — только отдельной командой
+`npm run db:migrate` с явно заданными переменными и подтверждением.
 
 ## Документы
 - `SPECIFICATION.md` — итоговое рабочее ТЗ.

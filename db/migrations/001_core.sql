@@ -1,6 +1,5 @@
 -- PostgreSQL 15+. Run only against a dedicated empty development/test database.
 -- Not applied automatically; do not use the demo directory as production seed.
-BEGIN;
 
 CREATE TABLE app_user (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -136,4 +135,3 @@ CREATE TABLE audit_event (
 -- Separate DB identities: migrations are not executed with the application role.
 -- Grants/RLS and server policies are required before exposing these tables.
 -- No credentials, session secrets or raw contact payloads in audit_event.
-COMMIT;
