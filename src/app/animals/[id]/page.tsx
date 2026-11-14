@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ageLabel, animals, getAnimal, getOrg, sexLabels, speciesLabels, statusLabels } from "@/data";
 import { AnimalDetailClient } from "./client";
-import { SafeImg } from "@/components/ui";
+import { AnimalPhoto } from "@/components/AnimalPhoto";
 import { CompareButton } from "@/components/comparison";
 import { PetCard } from "@/components/PetCard";
 
@@ -24,7 +24,7 @@ export default async function AnimalPage({ params }: { params: Promise<{ id: str
   return <div className="pet-page">
     <nav className="pet-breadcrumbs" aria-label="Хлебные крошки"><Link href="/animals">Найти питомца</Link><span aria-hidden="true">/</span><span aria-current="page">{animal.name}</span></nav>
     <div className="pet-detail-layout">
-      <div className="pet-detail-visual"><div className="pet-detail-image-wrap"><SafeImg src={animal.image} alt={`${animal.name} — ${animal.breed}`} emoji="Фото" className="pet-detail-image" /><span className="pet-status-label">{statusLabels[animal.status]}</span></div><p className="pet-photo-caption">Демо-анкета / фотоиллюстрация. Порода и история не подтверждены.</p><div className="pet-detail-quote"><span className="pet-eyebrow">Не торопитесь с решением</span><p>Знакомство начинается<br />с <em>внимания.</em></p></div></div>
+      <div className="pet-detail-visual"><div className="pet-detail-image-wrap"><AnimalPhoto src={animal.image} name={animal.name} /><span className="pet-status-label">{statusLabels[animal.status]}</span></div><p className="pet-photo-caption">Демо-анкета / фотоиллюстрация. Порода и история не подтверждены.</p><div className="pet-detail-quote"><span className="pet-eyebrow">Не торопитесь с решением</span><p>Знакомство начинается<br />с <em>внимания.</em></p></div></div>
       <div className="pet-detail-copy"><p className="pet-eyebrow">История знакомства / {id.toUpperCase()}</p><h1>{animal.name}<span>.</span></h1><p className="pet-detail-breed">{animal.breed}</p><dl className="pet-facts"><div><dt>Возраст</dt><dd>{ageLabel(animal.age)}</dd></div><div><dt>Пол</dt><dd>{sexLabels[animal.sex]}</dd></div><div><dt>Город</dt><dd>{animal.city}</dd></div><div><dt>Статус</dt><dd>{statusLabels[animal.status]}</dd></div></dl>
         <section className="pet-detail-section"><h2>01 / Характер</h2><p className="pet-detail-description">{animal.description}</p></section>
         <section className="pet-detail-section"><h2>02 / Подходящий дом</h2><p>Состав семьи, ваш график, опыт с животными и условия дома стоит обсудить с приютом до знакомства. Индивидуальные требования в этой демо-анкете не указаны.</p></section>

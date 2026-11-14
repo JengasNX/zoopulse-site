@@ -2,12 +2,12 @@
 
 import { useEffect, useState, useRef, useId, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { MeetingMark } from "./Brand";
 
 /* ── Фото с fallback-заглушкой ── */
 export function SafeImg({
   src,
   alt,
-  emoji = "🐾",
   className = "",
   imgClassName = "",
 }: {
@@ -38,11 +38,11 @@ export function SafeImg({
   if (failed) {
     return (
       <div
-        className={`flex items-center justify-center bg-gradient-to-br from-sky-200 via-sky-100 to-indigo-200 text-6xl dark:from-slate-800 dark:via-slate-700 dark:to-sky-950 ${className}`}
+        className={`photo-unavailable ${className}`}
         role="img"
         aria-label={alt}
       >
-        <span className="drop-shadow">{emoji}</span>
+        <MeetingMark /><span>Фото недоступно</span>
       </div>
     );
   }

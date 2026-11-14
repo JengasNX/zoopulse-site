@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Manrope, Literata } from "next/font/google";
 import "./globals.css";
 import "./chrome.css";
 import "./pets.css";
@@ -7,17 +7,19 @@ import "./directory.css";
 import "./journal.css";
 import "./sculpture.css";
 import "./information.css";
+import "./polish.css";
 import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/ui";
 import { PrivacySettings } from "@/components/PrivacySettings";
 
-const geistSans = Geist({
+const geistSans = Manrope({
   variable: "--font-geist-sans",
   subsets: ["latin", "cyrillic"],
 });
 
+const editorial = Literata({ variable: "--font-editorial", subsets: ["latin", "cyrillic"], style: ["normal", "italic"], display: "swap" });
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
   openGraph: {
@@ -48,7 +50,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className={`${geistSans.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${editorial.variable} antialiased`}>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Providers>
           <a href="#main-content" className="skip-link">Перейти к содержимому</a>

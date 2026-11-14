@@ -19,8 +19,8 @@ const nextConfig: NextConfig = {
     ] }];
   },
   /* config options here */
-  cacheComponents: !pages,
-  partialPrefetching: !pages,
+  cacheComponents: false,
+  partialPrefetching: false,
   turbopack: {
     root: process.cwd(),
     rules: {

@@ -7,6 +7,7 @@ import { SearchWithSuggestions } from "@/components/SearchWithSuggestions";
 import { MeetingMark } from "@/components/Brand";
 import { HomeFundraisers } from "@/components/HomeFundraisers";
 import { MeetingSculpture } from "@/components/MeetingSculpture";
+import { PhotoEssay } from "@/components/PhotoEssay";
 import styles from "./home.module.css";
 
 const directions = [
@@ -75,5 +76,6 @@ export default function Home() {
 
     <section className={styles.join}><p className={styles.overline}>Для организаций</p><h2>Больше видимости.<br /><em>Больше участия.</em></h2><div><p>Готовим площадку, где приюты, клиники и зоопарки смогут рассказывать о своей работе. Посмотрите, как устроен проект.</p><Link className={styles.button} href="/about">О платформе ↗</Link></div></section>
     <p className={styles.credits}>Фото на первом экране: <a href="https://commons.wikimedia.org/wiki/File:Golde33443.jpg">Golden Trvs Gol twister</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>. Кадрирование и цветовая обработка — на той же лицензии. Остальные фото из учебных карточек требуют отдельной проверки перед запуском.</p>
+    <PhotoEssay />
   </div>;
 }

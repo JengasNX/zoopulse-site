@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Brand } from "./Brand";
+import { Icon } from "./Icon";
 import { ThemeToggle, useFavorites } from "./providers";
 
 const links = [
@@ -42,10 +43,10 @@ export function Navbar() {
       </nav>}
     </header>
     <nav className="mobile-bottom-navigation" aria-label="Быстрая навигация">
-      <Link href="/" aria-current={pathname === "/" ? "page" : undefined}><span aria-hidden="true">⌂</span>Главная</Link>
-      <Link href="/search" aria-current={pathname === "/search" ? "page" : undefined}><span aria-hidden="true">⌕</span>Поиск</Link>
-      <Link href="/favorites" aria-current={pathname === "/favorites" ? "page" : undefined}><span aria-hidden="true">♡</span>Избранное{count > 0 ? ` (${count})` : ""}</Link>
-      <button aria-expanded={open} aria-controls="site-menu" onClick={() => { setOpen(value => !value); window.scrollTo({ top: 0, behavior: "instant" }); }}><span aria-hidden="true">☰</span>Меню</button>
+      <Link href="/" aria-current={pathname === "/" ? "page" : undefined}><Icon name="home" />Главная</Link>
+      <Link href="/search" aria-current={pathname === "/search" ? "page" : undefined}><Icon name="search" />Поиск</Link>
+      <Link href="/favorites" aria-current={pathname === "/favorites" ? "page" : undefined}><Icon name="heart" />Избранное{count > 0 ? ` (${count})` : ""}</Link>
+      <button aria-expanded={open} aria-controls="site-menu" onClick={() => { setOpen(value => !value); window.scrollTo({ top: 0, behavior: "instant" }); }}><Icon name={open ? "close" : "menu"} />Меню</button>
     </nav>
   </>;
 }
