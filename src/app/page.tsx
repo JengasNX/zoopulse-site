@@ -28,7 +28,7 @@ export default function Home() {
           <div className={styles.heroActions}><Link className={styles.button} href="/animals">Найти питомца <span aria-hidden="true">↗</span></Link><Link className={styles.underlined} href="/fundraisers">Я хочу помочь</Link></div>
         </div>
         <figure className={styles.portrait}>
-          <Image src="/design-assets/portrait.jpg" alt="Щенок золотистого ретривера. Фотоиллюстрация, не объявление." width={800} height={965} sizes="(max-width: 700px) 75vw, 32vw" preload />
+          <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/design-assets/portrait.jpg`} alt="Щенок золотистого ретривера. Фотоиллюстрация, не объявление." width={800} height={965} sizes="(max-width: 700px) 75vw, 32vw" preload />
           <span className={styles.verticalLabel}>ИСТОРИЯ ЗНАКОМСТВА / 001</span>
           <figcaption><strong>У каждого — свой человек.</strong><Link href="/animals">Найти своего ↗</Link></figcaption>
           <p className={styles.photoNote}>Фотоиллюстрация. Не реальный подопечный.</p>

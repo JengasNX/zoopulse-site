@@ -1,5 +1,11 @@
 # Зоопульс
 
+Публичная демо-версия: https://jengasnx.github.io/zoopulse-site/
+Публикация через GitHub Actions после push в main.
+GitHub Pages обслуживает только статический интерфейс: аккаунты, база,
+платежи и доставка заявок здесь не запускаются. Серверные HTTP-заголовки
+из Next.js не применяются Pages; noindex в HTML сохраняется.
+
 Независимая платформа заботы о животных. Next.js 16 / TypeScript / React /
 Tailwind / Three.js. Сейчас — демонстрационный интерфейс, не production-сервис.
 

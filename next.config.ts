@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 
+const pages = process.env.GITHUB_PAGES === "true";
 const nextConfig: NextConfig = {
+  ...(pages ? {
+    output: "export" as const,
+    basePath: "/zoopulse-site",
+    trailingSlash: true,
+    images: { unoptimized: true },
+  } : {}),
+  env: { NEXT_PUBLIC_BASE_PATH: pages ? "/zoopulse-site" : "" },
   poweredByHeader: false,
   async headers() {
-    return [{ source: "/:path*", headers: [
+    return pages ? [] : [{ source: "/:path*", headers: [
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "X-Frame-Options", value: "DENY" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -11,8 +19,8 @@ const nextConfig: NextConfig = {
     ] }];
   },
   /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  cacheComponents: !pages,
+  partialPrefetching: !pages,
   turbopack: {
     root: process.cwd(),
     rules: {
